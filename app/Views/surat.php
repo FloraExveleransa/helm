@@ -5,8 +5,8 @@
         <div class="row">
           <div class="col-12 col-md-6 order-md-1 order-last">
             <h3><?=$title?></h3>
-             <h3>Halaman Data barang keluar</h3>
-            <p class="text-subtitle text-muted">Berikut ini adalah data barang keluar <?=$title?></p>
+             <h3>Surat Masuk</h3>
+            <p class="text-subtitle text-muted">Berikut ini adalah data Surat Masuk <?=$title?></p>
           </div>
           <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -18,36 +18,41 @@
     </div>
 
     <section class="section">
+
   <div class="card">
     <div class="card-body">
       <div class="table-responsive">
         <div class="form-group">
-        <?php
+         <?php
           if(session()->get('level')==1 || session()->get('level') == 2){
             ?>
-          <a href="<?=base_url('home/t_bk')?>">
-            <button class="btn btn-success">Tambah Data barang keluar</button>
+          <a href="<?=base_url('home/t_bm')?>">
+            <button class="btn btn-success">Tambah Data Surat Masuk</button>
           </a>
-           <?php } ?>
-          <a href="<?= base_url('home/print_bk') ?>">
-    <button class="btn btn-danger" id="printButton">Print Data Barang Keluar</button>
-</a>
-
-
+          <?php } ?>
+          <a href="<?=base_url('home/print_bm')?>">
+            <button class="btn btn-danger" id="printButton">Print Data Surat Masuk</button>
+          </a>
         </div>
         <table class="table table-striped" id="table1">
           <thead>
                 <tr>
                   <th>No</th>
-                  <th>kode barang </th>
-                  <th>Nama barang </th>
-                  <th>jumlah</th>
-                  <th>tgl keluar</th>
-                  <th>created at</th>
-                  <th>updated at</th>
+                  <th>Jenis Surat </th>
+                  <th>Nomor Surat </th>
+                  <th>Tanggal Pembuatan Surat</th>
+                  <th>Tanggal Batas Kirim</th>
+                  <th>Pengirim</th>
+                  <th>Penerima</th>
+                  <th>Perihal Surat </th>
+                  <th>Dokumen</th>
+                  <th>Status Terlambat</th>
+                  <th>Keterangan Terlambat</th>
+                  <th>Created at</th>
+                   <th>Updated at</th>
                    <?php if(session()->get('level')==1 || session()->get('level') == 2): ?>
-                  <th>Aksi</th>
-                    <?php endif; ?>  
+                  <th>Aksi</th>  
+                  <?php endif; ?>
                 </tr>
               </thead>
               <tbody>
@@ -57,22 +62,40 @@
                 ?>
                 <tr>
                   <td><?= $no++ ?></td>
-                  <td><?= $flora->id_brg ?></td>
-                  <td><?= $flora->nama_brg ?></td>
-                  <td><?= $flora->jumlah ?></td>
-                  <td><?= $flora->tgl_klr ?></td>
+                  <td><?= $flora->jenis_surat ?></td>
+                  <td><?= $flora->no_surat ?></td>
+                  <td><?= $flora->tanggal_surat ?></td>
+                  <td><?= $flora->tanggal_batas ?></td>
+                  <td><?= $flora->pengirim ?></td>
+                  <td><?= $flora->penerima ?></td>
+                  <td><?= $flora->perihal ?></td>
+                  <td><?= $flora->file_path ?></td>
+                  <td><?= $flora->status_terlambat ?></td>
+                  <td><?= $flora->keterangan_terlambat ?></td>
                   <td><?= $flora->created_at ?></td>
                   <td><?= $flora->updated_at ?></td>
                <td>
+              <?php if(session()->get('level')==1 || session()->get('level') == 2): ?>
 
-
-                <?php if(session()->get('level')==1 || session()->get('level') == 2): ?>
   <!-- Detail Button -->
-  <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#detailModal" data-id="<?= $flora->id_bk ?>">Detail</button>
+  <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#detailModal" data-id="<?= $flora->surat_id ?>">Detail</button>
  
 
 </td>
- <?php endif; ?> 
+
+<?php endif; ?>
+<script >
+  function showDetailModal() {
+  const userLevel = <?= session()->get('level') ?>; // Ambil level pengguna dari session
+  if (userLevel === 1) {
+    $('#detailModal').modal('show');
+  } else {
+    alert('Anda tidak memiliki izin untuk mengakses Surat Masuk');
+  }
+}
+
+</script>
+
                 </tr>
                 <?php
                 }
@@ -91,10 +114,10 @@
     <div class="modal-content">
       <div class="modal-header">
         
-        <h5 class="modal-title" id="detailModalLabel">Detail barang keluar</h5>
+        <h5 class="modal-title" id="detailModalLabel">Detail barang masuk</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
            <!-- User Details Form -->
-        <form id="userDetailForm" action="<?= base_url('home/update_bk') ?>" method="POST">
+        <form id="userDetailForm" action="<?= base_url('home/update_bm') ?>" method="POST">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -118,25 +141,25 @@
                 <input type="text" class="form-control" id="jumlah" name="jumlah" value="<?= $flora->jumlah?>" required>
           </div>
           <div class="form-group">
-            <label for="tgl_klr"> tgl keluar</label>
-                <input type="text" class="form-control" id="tgl_klr" name="tgl_klr" value="<?= $flora->tgl_klr?>" required>
+            <label for="tglmsk"> tgl msk</label>
+                <input type="text" class="form-control" id="tglmsk" name="tglmsk" value="<?= $flora->tglmsk?>" required>
           </div>
           
          <div class="form-group">
             <label for="created_at">created at</label>
              <input type="datetime-local" class="form-control" id="created_at" name="created_at" value="<?= $flora->created_at?>" required>
           </div>
-          <div class="form-group">
+          <div class="form-group"> x
             <label for="updated_at">updated at</label>
              <input type="datetime-local" class="form-control" id="updated_at" name="updated_at" value="<?= $flora->updated_at?>" required>
           </div>
        <div class="form-group d-inline-block">
   <div class="form-group d-inline-block ml-2">
-  <a href="<?= base_url('home/update_bk/'.$flora->id_bk) ?>">
+  <a href="<?= base_url('home/update_bm/'.$flora->id_bm) ?>">
     <button type="button" class="btn btn-danger" id="deleteUserBtn">simpan</button>
   </a>
 <div class="form-group d-inline-block ml-2">
-  <a href="<?= base_url('home/delete_bk/'.$flora->id_bk) ?>">
+  <a href="<?= base_url('home/delete_bm/'.$flora->id_bm) ?>">
     <button type="button" class="btn btn-danger" id="deleteUserBtn">Hapus</button>
   </a>
 </div>
@@ -150,10 +173,10 @@
   $(document).ready(function() {
     $('#detailModal').on('show.bs.modal', function(event) {
       var button = $(event.relatedTarget);
-      var userId = button.data('id_bk');
+      var userId = button.data('id_bm');
 
       $.ajax({
-        url: '<?= base_url('home/update_bk') ?>',
+        url: '<?= base_url('home/update_bm') ?>',
         method: 'POST',
         data: { id: userId },
         dataType: 'json',
@@ -162,10 +185,7 @@
           $('#id_brg').val(data.id_brg);
           $('#nama_brg').val(data.nama_brg);
           $('#jumlah').val(data.jumlah);
-          $('#tgl_klr').val(data.tgl_klr);
-            $('#created_at').val(data.created_at);
-          $('#updated_at').val(data.updated_at);
-          
+          $('#tglmsk').val(data.tglmsk);
           
         }
       });
@@ -174,7 +194,7 @@
     $('#userDetailForm').on('submit', function(event) {
       event.preventDefault();
       $.ajax({
-        url: '<?= base_url('home/update_bk') ?>',
+        url: '<?= base_url('home/update_bm') ?>',
         method: 'POST',
         data: $(this).serialize(),
         dataType: 'json',
@@ -193,36 +213,4 @@
       });
     });
   });
-</script>
-<script>
-$(document).ready(function() {
-    $('#table1').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            {
-                extend: 'copy',
-                className: 'btn btn-copy',
-                text: '<i class="fas fa-copy"></i> Copy'
-            },
-            {
-                extend: 'excel',
-                className: 'btn btn-excel',
-                text: '<i class="fas fa-file-excel"></i> Excel'
-            },
-            {
-                extend: 'pdf',
-                className: 'btn btn-pdf',
-                text: '<i class="fas fa-file-pdf"></i> PDF'
-            },
-            {
-                extend: 'print',
-                className: 'btn btn-print',
-                text: '<i class="fas fa-print"></i> Print',
-                action: function (e, dt, button, config) {
-                    window.location.href = '<?= base_url('home/print_bk') ?>';
-                }
-            }
-        ]
-    });
-});
 </script>

@@ -5,8 +5,8 @@
         <div class="row">
           <div class="col-12 col-md-6 order-md-1 order-last">
             <h3><?=$title?></h3>
-             <h3>Halaman Data barang masuk</h3>
-            <p class="text-subtitle text-muted">Berikut ini adalah data barang masuk <?=$title?></p>
+             <h3>Surat Masuk</h3>
+            <p class="text-subtitle text-muted">Berikut ini adalah data Surat Masuk <?=$title?></p>
           </div>
           <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -27,18 +27,18 @@
           if(session()->get('level')==1 || session()->get('level') == 2){
             ?>
           <a href="<?=base_url('home/t_bm')?>">
-            <button class="btn btn-success">Tambah Data barang masuk</button>
+            <button class="btn btn-success">Tambah Data Surat Masuk</button>
           </a>
           <?php } ?>
-          <a href="<?=base_url('home/print_bk')?>">
-            <button class="btn btn-danger" id="printButton">Print Data barang masuk</button>
+          <a href="<?=base_url('home/print_bm')?>">
+            <button class="btn btn-danger" id="printButton">Print Data Surat Masuk</button>
           </a>
         </div>
         <table class="table table-striped" id="table1">
           <thead>
                 <tr>
                   <th>No</th>
-                  <th>kode barang </th>
+                  <th>kode surat </th>
                   <th>Nama </th>
                   <th>jumlah</th>
                   <th>tgl masuk</th>
@@ -78,7 +78,7 @@
   if (userLevel === 1) {
     $('#detailModal').modal('show');
   } else {
-    alert('Anda tidak memiliki izin untuk mengakses detail barang.');
+    alert('Anda tidak memiliki izin untuk mengakses Surat Masuk');
   }
 }
 

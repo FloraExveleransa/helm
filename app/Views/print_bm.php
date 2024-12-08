@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cetak Data Users</title>
+    <title>Cetak Data Surat masuk</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -127,16 +127,23 @@
             <p>Nomor Telepon: 085268187779</p>
         </div>
         <div class="separator"></div>
-        <h1>Data Users</h1>
+        <h1>Data Surat Masuk</h1>
         <table id="print-table">
             <thead>
                 <tr>
-                    <th>No</th>
-                   
-                    <th>Nama </th>
-                    <th>Nomor Hp</th>
-                    <th>Status</th>
-                    
+                  <th>No</th>
+                  <th>Jenis Surat </th>
+                  <th>Nomor Surat </th>
+                  <th>Tanggal Pembuatan Surat</th>
+                  <th>Tanggal Batas Kirim</th>
+                  <th>Pengirim</th>
+                  <th>Penerima</th>
+                  <th>Perihal Surat </th>
+                  <th>Dokumen</th>
+                  <th>Status Terlambat</th>
+                  <th>Keterangan Terlambat</th>
+                  <th>Created at</th>
+                   <th>Updated at</th>
                 </tr>
             </thead>
             <tbody>
@@ -144,16 +151,23 @@
                     <?php $no = 1; foreach($manda as $flora): ?>
                     <tr>
                         <td><?= $no++ ?></td>
-                       
-                        <td><?= $flora['nama'] ?></td>
-                        <td><?= $flora['no_hp'] ?></td>
-                        <td><?= $flora['id_level'] ?></td>
-                       
+                        <td><?= $flora['jenis_surat'] ?></td>
+                        <td><?= $flora['no_surat'] ?></td>
+                        <td><?= $flora['tanggal_surat'] ?></td>
+                        <td><?= $flora['tanggal_batas'] ?></td>
+                        <td><?= $flora['pengirim'] ?></td>
+                        <td><?= $flora['penerima'] ?></td>
+                        <td><?= $flora['perihal'] ?></td>
+                        <td><?= $flora['file_path'] ?></td>
+                        <td><?= $flora['status_terlambat'] ?></td>
+                        <td><?= $flora['keterangan_terlambat'] ?></td>
+                        <td><?= $flora['created_at'] ?></td>
+                        <td><?= $flora['updated_at'] ?></td>
                     </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="7">Tidak ada data barang masuk</td>
+                        <td colspan="7">Tidak ada data surat masuk</td>
                     </tr>
                 <?php endif; ?>
             </tbody>
@@ -200,7 +214,7 @@
 
         // Add table title
         doc.setFontSize(14);
-        doc.text("Data Barang masuk", 10, 40);
+        doc.text("Data Surat masuk", 10, 40);
 
         // Generate table
         doc.autoTable({
@@ -234,7 +248,7 @@
 
             // Add table title
             doc.setFontSize(14);
-            doc.text("Data Barang Keluar", 10, 35);
+            doc.text("Data Surat Keluar", 10, 35);
 
             // Generate table
             doc.autoTable({

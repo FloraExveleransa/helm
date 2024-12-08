@@ -91,6 +91,19 @@ protected $table_history_hapus = 'history_hapus';
         return $query->getRow();
     }
 
+    public function getWheres($tabel, $where)
+{
+    $query = $this->db->table($tabel)
+                      ->getWhere($where);
+
+    if (!$query) {
+        log_message('error', 'Query failed for table: ' . $tabel);
+        return false; // Handle the error as needed
+    }
+
+    return $query->getRowArray();
+}
+
     public function editpw($tabel, $isi, $where)
     {
         return $this->db->table($tabel)
@@ -105,6 +118,18 @@ protected $table_history_hapus = 'history_hapus';
                         ->orderby($id, 'desc')
                         ->getWhere($where);
     }
+public function getDataPenitipan()
+{
+    return $this->db->table('data_penitipan')
+        ->select('data_penitipan.*, rak.nomor AS nama_rak')
+        ->join('rak', 'data_penitipan.id_rak = rak.id_rak', 'left')
+        ->get()
+        ->getResult();
+}
+public function getAllRaks()
+{
+  return $this->db->table('rak')->get()->getResult();
+}
 
     public function tambah($tabel, $isi)
     {
@@ -123,15 +148,31 @@ protected $table_history_hapus = 'history_hapus';
         return $this->db->table($table)
                         ->delete($where);
     }
+public function getRakTerisi()
+{
+    return $this->db->table('data_penitipan')
+                    ->select('id_rak')
+                    ->where('id_rak IS NOT NULL')
+                    ->groupBy('id_rak')
+                    ->get()
+                    ->getResult();
+}
 
     public function insert_user($data)
     {
         return $this->db->table('users')->insert($data);
     }
-
+    public function get_all_data2()
+    {
+         return $this->db->get('data_penitipan')->result();  // Ganti 'nama_tabel' dengan nama tabel yang sesuai
+    }
+public function get_all_rak()
+    {
+        return $this->db->get('rak')->result();
+    }
     public function get_all_users()
     {
-        return $this->db->table('users')->get()->getResult();
+        return $this->db->table('user')->get()->getResult();
     }
 
     public function getWhere1($tabel, $where)
@@ -203,6 +244,51 @@ public function insert_barang($data) {
                         ->update(['status_pengiriman' => $status], ['id_pesanan' => $id_pesanan]);
     }
 
+    public function restoreProduct($table,$column,$id)
+{
+    // Ambil data dari tabel backup
+    $backupData = $this->db->table($table)->where($column, $id)->get()->getRowArray();
 
+    if ($backupData) {
+        // Tentukan nama tabel utama tempat data akan di-restore
+        $mainTable = str_replace('_backup', '', $table);
+
+        // Update data di tabel utama
+        $this->db->table($mainTable)->where($column, $id)->update($backupData);
+    }
+}
+
+public function softdelete1($table,$kolom, $noTrans)
+{
+    
+    $this->db->table($table)->update(['deleted_at' => date('Y-m-d H:i:s')], [$kolom => $noTrans]);
+
+   
+}
+
+public function restore1($table,$kolom,$noTrans)
+{
+    
+    $this->db->table($table)->update(['deleted_at' => Null], [$kolom => $noTrans]);
+   
+}
+
+public function tampilwhere($tabel){
+    return $this->db->table($tabel)
+                    ->getwhere('deleted_at IS NOT NULL')
+                    ->getResult();
+}
+public function updatePenitipan($id, $data)
+{
+    return $this->db->table('data_penitipan')
+                    ->where('id_datapenitipan', $id)
+                    ->update($data);
+}
+
+public function tampilwherenull($tabel){
+    return $this->db->table($tabel)
+                    ->getwhere('deleted_at IS NULL')
+                    ->getResult();
+}
     
 }

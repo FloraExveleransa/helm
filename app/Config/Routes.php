@@ -28,7 +28,7 @@ $routes->post('home/aksi_update_users', 'Home::aksi_update_users');
 $route['pengiriman'] = 'home/pengiriman';
 $route['update_status_pembayaran'] = 'home/update_status_pembayaran';
 $route['history-pesanan'] = 'Home/historyPesanan';
-
+$route['home/print_u'] = 'home/print_u';
 $route['home/print_bk'] = 'home/print_bk';
 $routes->get('/signup', 'Home::signup');
 $routes->post('/register_user', 'Home::register_user');
@@ -40,6 +40,11 @@ $routes->post('home/updateStatus', 'ControllerName::updateStatus'); // Ganti den
 $routes->get('/home/lppw', 'Home::lppw');
 $routes->post('/home/forgot_password_action', 'Home::forgot_password_action');
 $routes->get('home/akses_view', 'Home::akses_view');
+$routes->get('home/update_u/(:num)', 'Home::update_u/$1');
+$routes->get('home/delete_penitipan/(:num)', 'Home::delete_penitipan/$1');
+$routes->post('home/get_user', 'Home::get_user');
+$routes->post('home/update_penitipan', 'Home::update_penitipan');
+
 // $routes->post('home/update_access', 'Home::update_access');
 
 /*

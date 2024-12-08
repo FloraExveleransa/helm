@@ -100,17 +100,17 @@
                     <tr>
                         <th>No</th>
                         <th>Nama User</th>
-                        <th>Waktu Login</th>
-                        <th>Waktu Logout</th>
+                        <th>Activity</th>
+                        <th>waktu</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $no = 1; foreach ($logins as $login): ?>
+                    <?php $no = 1; foreach ($activity as $login): ?>
                         <tr>
                             <td><?= $no++ ?></td>
                             <td><?= $login->nama_users ?></td>
-                            <td><?= $login->login_time ?></td>
-                            <td><?= $login->logout_time ?></td>
+                            <td><?= $login->activity ?></td>
+                            <td><?= $login->timestamp ?></td>
                         </tr>
                     <?php endforeach; ?>
             </tbody>

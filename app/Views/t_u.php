@@ -23,30 +23,16 @@
               <!-- Horizontal Form -->
               <form action="<?= base_url('home/aksi_tu') ?>" method="POST">
                 <div class="row mb-3">
-                  <label for="nama_users" class="col-sm-2 col-form-label">Nama users</label>
+                  <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nama_users" name="nama_users" placeholder="Masukkan nama users" required>
+                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama users" required>
                   </div>
                 </div>
 
                 <div class="row mb-3">
-                  <label for="email" class="col-sm-2 col-form-label">Email</label>
+                  <label for="no_hp" class="col-sm-2 col-form-label">Nomor Telepon</label>
                   <div class="col-sm-10">
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan email" required>
-                  </div>
-                </div>
-
-                 <div class="row mb-3">
-                  <label for="pw" class="col-sm-2 col-form-label">Password</label>
-                  <div class="col-sm-10">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password" required>
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                  <label for="no_telp" class="col-sm-2 col-form-label">Nomor Telepon</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="no_telp" name="no_telp" placeholder="Masukkan nomor telepon" required>
+                    <input type="text" class="form-control" id="no_hp" name="no_hp" placeholder="Masukkan nomor telepon" required>
                   </div>
                 </div>
 
