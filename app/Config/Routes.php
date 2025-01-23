@@ -28,10 +28,17 @@ $routes->post('home/aksi_update_users', 'Home::aksi_update_users');
 $route['pengiriman'] = 'home/pengiriman';
 $route['update_status_pembayaran'] = 'home/update_status_pembayaran';
 $route['history-pesanan'] = 'Home/historyPesanan';
+$routes->get('home/hapus_pengumuman/(:num)', 'Home::hapus_pengumuman/$1');
+$routes->get('home/delete_jadwal/(:num)', 'Home::delete_jadwal/$1');
+$routes->post('home/update_jadwal', 'Home::update_jadwal');
 
 $route['home/print_bk'] = 'home/print_bk';
 $routes->get('/signup', 'Home::signup');
 $routes->post('/register_user', 'Home::register_user');
+$routes->post('home/send-whatsapp', 'Home::sendWhatsApp');
+$routes->post('home/t_pengumuman', 'HomeController::t_pengumuman');
+$routes->get('home/schedules', 'Home::schedules');
+$route['home/hapus_jadwal/(:num)'] = 'home/hapus_jadwal/$1';
 
 $routes->get('/home/update_profile', 'Home::update_profile');
 $routes->get('/hslogin', 'Home::riwayat_login');

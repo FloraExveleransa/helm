@@ -29,7 +29,10 @@ class M_trader extends Model
                         ->get()
                         ->getResult();
     }
-
+    public function update_schedule($id, $data)
+    {
+        return $this->update($id, $data);  // Use update method to update data
+    }
     // Methods for other functionalities...
 protected $table_history_hapus = 'history_hapus';
     protected $primaryKey_history_hapus = 'id_hps';
@@ -45,12 +48,37 @@ protected $table_history_hapus = 'history_hapus';
             'deleted_at' => date('Y-m-d H:i:s')
         ]);
     }
-    public function tampil($tabel)
-    {
-        return $this->db->table($tabel)
-                        ->get()
-                        ->getResult();
+    public function tambahPengumuman($data)
+{
+    return $this->db->table('pengumuman')->insert($data);
+}
+  public function tampil($table)
+{
+    return $this->db->table($table)->get()->getResult();
+}
+public function getSchedulesWithUsers()
+{
+    $builder = $this->db->table('schedules'); // Mendapatkan Query Builder untuk tabel schedules
+    $builder->select('schedules.*, users.nama_users as created_by_name'); // Pilih kolom yang akan diambil
+    $builder->join('users', 'schedules.created_by = users.id_users', 'left'); // Gabungkan dengan tabel users
+    $query = $builder->get(); // Eksekusi query
+    return $query->getResult(); // Kembalikan hasil query
+}
+
+    
+      public function getAllPengumuman() {
+        // Ambil semua data pengumuman dari tabel 'pengumuman'
+        return $this->db->get('pengumuman')->result_array();
     }
+public function getAnnouncementsWithUsers()
+{
+    $this->db->select('announcements.*, users.nama_users');
+    $this->db->from('announcements');
+    $this->db->join('users', 'announcements.created_by = users.id_users', 'left'); // Left join untuk mencocokkan id_users
+    $query = $this->db->get();
+    return $query->result();
+}
+
 
     public function join($tabel, $tabel2, $on)
     {
@@ -90,6 +118,23 @@ protected $table_history_hapus = 'history_hapus';
 
         return $query->getRow();
     }
+public function get_all_pengumuman() {
+        // Fetch all pengumuman data from the database
+        $query = $this->db->get('pengumuman'); // Assuming 'pengumuman' is your table name
+        return $query->result();
+    }
+    public function getWheres($tabel, $where)
+{
+    $query = $this->db->table($tabel)
+                      ->getWhere($where);
+
+    if (!$query) {
+        log_message('error', 'Query failed for table: ' . $tabel);
+        return false; // Handle the error as needed
+    }
+
+    return $query->getRowArray();
+}
 
     public function editpw($tabel, $isi, $where)
     {
@@ -117,12 +162,12 @@ protected $table_history_hapus = 'history_hapus';
         return $this->db->table($tabel)
                         ->update($isi, $where);
     }
-
-    public function hapus($table, $where)
+public function hapus($table, $where)
     {
         return $this->db->table($table)
                         ->delete($where);
     }
+
 
     public function insert_user($data)
     {
@@ -203,6 +248,45 @@ public function insert_barang($data) {
                         ->update(['status_pengiriman' => $status], ['id_pesanan' => $id_pesanan]);
     }
 
+    public function restoreProduct($table,$column,$id)
+{
+    // Ambil data dari tabel backup
+    $backupData = $this->db->table($table)->where($column, $id)->get()->getRowArray();
 
+    if ($backupData) {
+        // Tentukan nama tabel utama tempat data akan di-restore
+        $mainTable = str_replace('_backup', '', $table);
+
+        // Update data di tabel utama
+        $this->db->table($mainTable)->where($column, $id)->update($backupData);
+    }
+}
+
+public function softdelete1($table,$kolom, $noTrans)
+{
+    
+    $this->db->table($table)->update(['deleted_at' => date('Y-m-d H:i:s')], [$kolom => $noTrans]);
+
+   
+}
+
+public function restore1($table,$kolom,$noTrans)
+{
+    
+    $this->db->table($table)->update(['deleted_at' => Null], [$kolom => $noTrans]);
+   
+}
+
+public function tampilwhere($tabel){
+    return $this->db->table($tabel)
+                    ->getwhere('deleted_at IS NOT NULL')
+                    ->getResult();
+}
+
+public function tampilwherenull($tabel){
+    return $this->db->table($tabel)
+                    ->getwhere('deleted_at IS NULL')
+                    ->getResult();
+}
     
 }

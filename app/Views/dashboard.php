@@ -1,141 +1,240 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Skydash Admin</title>
-  <!-- plugins:css -->
-  <link rel="stylesheet" href="vendors/feather/feather.css">
-  <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
-  <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
-  <!-- endinject -->
-  <!-- Plugin css for this page -->
-  <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
-  <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
-  <link rel="stylesheet" type="text/css" href="js/select.dataTables.min.css">
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
-  <link rel="stylesheet" href="css/vertical-layout-light/style.css">
-  <!-- endinject -->
-  <link rel="shortcut icon" href="images/pt.jpg" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Pengaturan & Peraturan Aplikasi Bel Sekolah</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Styles dasar untuk layout dashboard */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        /* Container utama */
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: #2980b9;
+            color: #fff;
+            text-align: center;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        /* Main Content */
+        main {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            padding: 20px;
+        }
+
+        /* Section style */
+        section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        section:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        section h2 {
+            color: #2980b9;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            border-bottom: 2px solid #2980b9;
+            padding-bottom: 5px;
+        }
+
+        section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        section li {
+            font-size: 1rem;
+            line-height: 1.6;
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        section li:before {
+            content: "•";
+            color: #2980b9;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Important Note */
+        .important-note {
+            background-color: #fcf8e3;
+            padding: 20px;
+            border-left: 5px solid #f39c12;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-top: 30px;
+            border-radius: 5px;
+            color: #f39c12;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #2980b9;
+            color: white;
+            border-radius: 5px;
+            margin-top: 40px;
+        }
+
+        /* Button Custom Styles */
+        .btn {
+            padding: 15px;
+            text-align: center;
+            display: inline-block;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #2980b9;
+            border-radius: 8px;
+            text-decoration: none;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .btn:hover {
+            background-color: #3498db;
+        }
+
+        .icon {
+            font-size: 2rem;
+            margin-right: 10px;
+        }
+
+        .btn-container {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        /* Jadwal Terbaru */
+        .schedule-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .schedule-card h3 {
+            color: #2980b9;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .schedule-card p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .schedule-card .time {
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .schedule-card .repeat {
+            font-style: italic;
+            color: #f39c12;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header>
+            <h1>Dashboard Pengaturan & Peraturan Aplikasi Bel Sekolah</h1>
+        </header>
 
-      <!-- partial -->
-      <div class="main-panel">
-        <div class="content-wrapper">
-          <div class="row">
-            <div class="col-md-12 grid-margin">
-              <div class="row">
-                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold">Welcome! <?= session()->get('id_level')?></h3>
-                  <h6 class="font-weight-normal mb-0"> <span class="text-primary"></span></h6>
+        <!-- Konten Utama -->
+        <main>
+            <!-- Button Menu -->
+            <section>
+                <h2>Menu Utama</h2>
+                <div class="btn-container">
+                    <!-- Button ke View Schedules -->
+                    <a href="schedules" class="btn">
+                        <span class="icon"><i class="fas fa-calendar-check"></i></span> Lihat Jadwal Bel
+                    </a>
+                    <!-- Button ke View Users -->
+                    <a href="users" class="btn">
+                        <span class="icon"><i class="fas fa-users"></i></span> Daftar Pengguna
+                    </a>
+                    <!-- Button ke Edit Profile -->
+                    <a href="pt" class="btn">
+                        <span class="icon"><i class="fas fa-user-edit"></i></span> Edit Profil
+                    </a>
+                    <!-- Button ke History -->
+                    <a href="activity" class="btn">
+                        <span class="icon"><i class="fas fa-history"></i></span> Riwayat Login
+                    </a>
                 </div>
-                <div class="col-12 col-xl-4">
-                 <div class="justify-content-end d-flex">
-                  <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                    <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button" id="dropdownMenuDate2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                     <i class="mdi mdi-calendar"></i> Today (10 Jan 2021)
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
-                      <a class="dropdown-item" href="#">January - March</a>
-                      <a class="dropdown-item" href="#">March - June</a>
-                      <a class="dropdown-item" href="#">June - August</a>
-                      <a class="dropdown-item" href="#">August - November</a>
-                    </div>
-                  </div>
-                 </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-  <div class="row">
-  <!-- Bagian foto/logo -->
-  <div class="col-md-6 mb-4">
-    <div class="card tale-bg">
-      <div class="card-people mt-auto">
-        <img src="<?php echo base_url('images/pt1.jpg') ?>" alt="logo" style="width: 100%; height: auto;">
-        <div class="weather-info">
-          <div class="d-flex">
-            <!-- Konten tambahan bisa ditambahkan di sini jika diperlukan -->
-          </div>
-        </div>
-      </div>
+            </section>
+
+            <!-- Add New Schedule -->
+            <section>
+                <h2>Tambah Jadwal Bel Terbaru</h2>
+                <p>Tambahkan jadwal bel terbaru ke dalam sistem untuk memastikan jadwal bel sekolah berjalan lancar.</p>
+                <a href="t_jadwal" class="btn">
+                    <span class="icon"><i class="fas fa-plus-circle"></i></span> Tambah Jadwal
+                </a>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 Bel Sekolah. Semua hak cipta dilindungi.</p>
+        </footer>
     </div>
-  </div>
 
-  <!-- Bagian tentang perusahaan -->
-  <div class="col-md-6 mb-4 stretch-card transparent">
-    <div class="card">
-      <div class="card-body">
-        <p class="card-title">Tentang Perusahaan</p>
-        <p class="font-weight-500">PT Mitra Dagang Utama adalah perusahaan yang bergerak di bidang distribusi dan penjualan bahan-bahan pokok atau sembako. Berdiri sejak tahun 2012, perusahaan ini telah menjadi salah satu pemain utama dalam industri distribusi sembako di Indonesia.</p>
-        <div class="d-flex flex-wrap mb-5">
-          <div class="mr-5 mt-3">
-            <p class="text-muted">Customer</p>
-            <h3 class="text-primary fs-30 font-weight-medium">12.3k</h3>
-          </div>
-          <div class="mr-5 mt-3">
-            <p class="text-muted">Orderan</p>
-            <h3 class="text-primary fs-30 font-weight-medium">14k</h3>
-          </div>
-          <div class="mr-5 mt-3">
-            <p class="text-muted">Rating</p>
-            <h3 class="text-primary fs-30 font-weight-medium">71.56%</h3>
-          </div>
-        </div>
-        <canvas id="order-chart"></canvas>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- Pemasukan dan Pengeluaran Stok Barang di bawah foto/logo -->
-<div class="row">
-  <div class="col-md-12 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-body">
-        <div class="d-flex justify-content-between">
-          <p class="card-title">Pemasukan dan Pengeluaran Stok Barang</p>
-          <a href="#" class="text-info">View all</a>
-        </div>
-        <p class="font-weight-500">Sejauh ini persentase peningkatan barang berpihak pada barang masuk karena peningkatan barang masuk berkembang pesat pada tahun ini.</p>
-        <div id="sales-legend" class="chartjs-legend mt-4 mb-2"></div>
-        <canvas id="sales-chart"></canvas>
-      </div>
-    </div>
-  </div>
-</div>
-
-            
-                 
-  <!-- container-scroller -->
-
-  <!-- plugins:js -->
-  <script src="vendors/js/vendor.bundle.base.js"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page -->
-  <script src="vendors/chart.js/Chart.min.js"></script>
-  <script src="vendors/datatables.net/jquery.dataTables.js"></script>
-  <script src="vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-  <script src="js/dataTables.select.min.js"></script>
-
-  <!-- End plugin js for this page -->
-  <!-- inject:js -->
-  <script src="js/off-canvas.js"></script>
-  <script src="js/hoverable-collapse.js"></script>
-  <script src="js/template.js"></script>
-  <script src="js/settings.js"></script>
-  <script src="js/todolist.js"></script>
-  <!-- endinject -->
-  <!-- Custom js for this page-->
-  <script src="js/dashboard.js"></script>
-  <script src="js/Chart.roundedBarCharts.js"></script>
-  <!-- End custom js for this page-->
+    <!-- Include Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </body>
-
 </html>
 

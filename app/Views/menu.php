@@ -4,9 +4,9 @@
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
          <div class="navbar-brand">
-           <a class="navbar-brand brand-logo" href="index.html">
+           <a class="navbar-brand brand-logo" href="schedules">
              <div class="sidebar-header">
-                  <img src="<?php echo base_url('images/pt.jpg') ?>" alt="logo">
+                  <img src="<?php echo base_url('images/sph.jpg') ?>" alt="logo">
                 <div style="font-size: 20px; color: #333; font-weight: bold;">
                   <?= $setting->nama_toko ?>
                 </div>
@@ -58,7 +58,7 @@
 <!-- Dropdown Profil -->
 <li class="nav-item nav-profile dropdown">
     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-        <img src="<?php echo base_url('images/logo8.png') ?>" alt="User Profile">
+        <img src="<?php echo base_url('images/sph.jpg') ?>" alt="User Profile">
     </a>
 
  <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown" style="text-align: center;">
@@ -240,245 +240,76 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="dashboard">
+            <a class="nav-link" href="schedules">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
-  <?php
-        if(session()->get('level')==1){
-          ?>
-               <li class="nav-item">
-  <a class="nav-link" href="users" aria-controls="ui-basic">
-    <i class="fas fa-users menu-icon"></i>
-    <span class="menu-title">Data users</span>
-    </a>
-</li>
-<?php } ?>
-
-
-  <?php
-        if(session()->get('level')==1){
-          ?>
-          <li class="nav-item">
-  <a class="nav-link" href="karyawan" aria-controls="ui-basic">
-    <i class="fas fa-user-tie menu-icon"></i>
-    <span class="menu-title">Data karyawan</span>
-    </a>
-</li>
-<?php } ?>
- 
-
-
- <?php
-          if(session()->get('level')==1 || session()->get('level') == 2){
-            ?>
-<li class="nav-item">
-  <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
-    <i class="fas fa-box menu-icon"></i>
-    <span class="menu-title">Data barang</span>
-  </a>
-</li>
-
-            </a>
-            </li>
-            <div class="collapse" id="charts">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="bm">Data Barang Masuk</a></li>
-              </ul>
-            </div>
-            <div class="collapse" id="charts">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="bk"> Data Barang Keluar</a></li>
-              </ul>
-            </div>
-          </li>
-
-<?php } ?>
 
 
   
+
+ 
+ 
+
+ 
+  
+
+
+
 <?php
+        if(session()->get('level')==1){
+          ?>
+            <li class="nav-item">
+  <a class="nav-link" href="users" aria-controls="ui-basic">
+    <i class="fas fa-building menu-icon"></i>
+    <span class="menu-title">Daftar User</span>
+    
+  </a>
+</li>
+  <?php } ?>
+  <?php
         if(session()->get('level')==1){
           ?>
             <li class="nav-item">
   <a class="nav-link" href="pt" aria-controls="ui-basic">
     <i class="fas fa-building menu-icon"></i>
-    <span class="menu-title">Data Perusahaan</span>
+    <span class="menu-title">e-Profile </span>
     
   </a>
 </li>
   <?php } ?>
 
-  <?php
-        if(session()->get('level')==5){
-          ?>
-            <li class="nav-item">
-  <a class="nav-link" href="barang" aria-controls="ui-basic">
-    <i class="fas fa-building menu-icon"></i>
-    <span class="menu-title">Order Barang</span>
-    
-  </a>
-</li>
-  <?php } ?>
 
-  <!-- <?php
-        if(session()->get('level')==5){
-          ?>
-            <li class="nav-item">
-  <a class="nav-link" href="transaksi" aria-controls="ui-basic">
-    <i class="fas fa-building menu-icon"></i>
-    <span class="menu-title">Transaksi</span>
-    
-  </a>
-</li>
-  <?php } ?>
- -->
+
   <?php
-        if(session()->get('level')==5){ //khusus pembeli
-          ?>
-            <li class="nav-item">
-  <a class="nav-link" href="historypesanan" aria-controls="ui-basic">
-    <i class="fas fa-building menu-icon"></i>
+          if(session()->get('level')==1 || session()->get('level') == 2){
+            ?>
+<li class="nav-item">
+  <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+    <i class="fas fa-box menu-icon"></i>
     <span class="menu-title">History</span>
-    
   </a>
 </li>
-  <?php } ?>
-
-
-
-<?php
-        if(session()->get('level')==1){
-          ?> 
-          <li class="nav-item">
-  <a class="nav-link" href="historypesanan" aria-controls="ui-basic">
-    <i class="fas fa-user-tie menu-icon"></i>
-    <span class="menu-title"> Pesanan Customer </span>
     </a>
-</li>
-<?php } ?>
-
-
- <?php
-        if(session()->get('level')==1 || session()->get('level') == 2){
-          ?>
-            <li class="nav-item">
-  <a class="nav-link" href="barang" aria-controls="ui-basic">
-    <i class="fas fa-tag menu-icon"></i>
-    <span class="menu-title">Barang Jual</span>
-    
-  </a>
-</li>
-  <?php } ?>
-
-  <?php
-if(session()->get('level') == 2 ) {
-?>
-<li class="nav-item">
-  <a class="nav-link" href="pengiriman" aria-controls="ui-basic">
-    <i class="fas fa-truck menu-icon"></i> <!-- Changed icon -->
-    <span class="menu-title">Pengiriman</span>
-  </a>
-</li>
-<?php } ?>
-
-
-<?php
-if(session()->get('level') == 2) {
-?>
-<li class="nav-item">
-  <a class="nav-link" href="jadwal" aria-controls="ui-basic">
-    <i class="fas fa-calendar-alt menu-icon"></i> <!-- Changed icon -->
-    <span class="menu-title">Jadwal</span>
-  </a>
-</li>
-<?php } ?>
-
-
-
-
-
-<?php
-  if(session()->get('level') == 1){
-    ?>
-<li class="nav-item">
-  <a class="nav-link" data-toggle="collapse" href="#reports" aria-expanded="false" aria-controls="reports">
-    <i class="fas fa-file-alt menu-icon"></i>
-    <span class="menu-title">Laporan</span>
-    <i class="menu-arrow"></i>
-  </a>
-  <div class="collapse" id="reports">
-    <ul class="nav flex-column sub-menu">
-      <li class="nav-item">
-        <!-- <a class="nav-link" href="laporantransaksi">
-          Transaksi Pembayaran
-        </a> -->
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="laporanbm">
-          Barang Masuk
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="laporanbk">
-          Barang Keluar
-        </a>
-      </li>
-    </ul>
-  </div>
-</li>
- <?php } ?>
-
-
-
-  
-
-
-  <?php
-        if(session()->get('level')==1){ //khusus admin
-          ?>           <!-- Dropdown Menu untuk Laporan -->
-</li><li class="nav-item">
-  <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
-    <i class="fas fa-history menu-icon"></i>
-    <span class="menu-title">History</span>
-    <i class="menu-arrow"></i>
-  </a>
-</li>
-</a>
-<?php } ?>
-
-
-
-           <div class="collapse" id="icons">
-  <ul class="nav flex-column sub-menu">
-    <li class="nav-item">
-      <a class="nav-link" href="/hslogin">
-    <i class="fas fa-sign-in-alt"></i> Login
-</a>
-<!-- 
-           <div class="collapse" id="icons">
-  <ul class="nav flex-column sub-menu">
-    <li class="nav-item">
-      <a class="nav-link" href="history_hapus">
-    <i class="fas fa-sign-in-alt"></i> Delete
-</a>
- -->
     </li>
-  </ul>
-</div>
+           
+          
+           <div class="collapse" id="charts">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="activity"> Aksi Login</a></li>
+              </ul>
+            </div>
+          </li>
+            
+      
+<?php } ?>
 
 
+ 
 
 
-
-
-
-
-
-
-
-            <div class="collapse" id="auth">
+             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
                 
                 
